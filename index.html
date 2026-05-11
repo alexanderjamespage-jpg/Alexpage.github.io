@@ -909,8 +909,18 @@ tr:hover td{background:#1e1d30;}
 // We use a master bin that maps roomCode → binId
 // Each game gets its own bin for state
 const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
-// Free API key — rate limited but fine for small tournaments
+// Default/free API key (may expire or be rate-limited). Users can override with their own key.
 const JSONBIN_KEY = '$2a$10$8K1p/a.5B3uCj8HoVLimvOVMhgr1jLtMDPFUDumP7DW.0MjDcLWQ6';
+const JSONBIN_KEY_STORAGE = 'pkl_jsonbin_key';
+
+function getJsonbinKey(){
+  try { return localStorage.getItem(JSONBIN_KEY_STORAGE) || JSONBIN_KEY; } catch { return JSONBIN_KEY; }
+}
+function setJsonbinKeyPrompt(){
+  const k = prompt('Enter your JSONBin Master Key (X-Master-Key) to enable online sync.\nYou can get a free key from https://jsonbin.io');
+  if(!k) return notify('No key provided');
+  try{ localStorage.setItem(JSONBIN_KEY_STORAGE,k); notify('Saved JSONBin key — retry online actions'); } catch(e){ console.error(e); notify('Could not save key'); }
+}
 
 // ── Local storage keys ──
 const DB_KEY      = 'pkl_users';
@@ -940,13 +950,20 @@ async function binCreate(data) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_KEY,
+        'X-Master-Key': getJsonbinKey(),
         'X-Bin-Private': 'false',
         'X-Bin-Name': 'pkl_'+Date.now()
       },
       body: JSON.stringify(data)
     });
-    if (!r.ok) { const t = await r.text(); console.error('binCreate fail:', t); return null; }
+    if (!r.ok) {
+      const t = await r.text(); console.error('binCreate fail:', r.status, t);
+      // If unauthorized, suggest setting API key
+      if (r.status===401||r.status===403) {
+        console.warn('JSONBin auth failed — prompt user to set key');
+      }
+      return null;
+    }
     const j = await r.json();
     return j.metadata?.id || null;
   } catch(e) { console.error('binCreate error:', e); return null; }
@@ -1115,25 +1132,17 @@ async function createNewGame(){
 
   const binId=await binCreate(initialState);
   if(!binId){
-    // Remote create failed — ask user whether to retry or create local-only
-    let tryAgain = confirm('Could not create remote game.\n\nPress OK to retry creating the game online, or Cancel to create a local-only game.');
-    if(tryAgain){
-      // attempt up to 2 more times
-      let attempts=0; let newBin=null;
-      while(attempts<2 && !newBin){ attempts++; newBin = await binCreate(initialState); }
-      if(newBin) {
-        // succeeded on retry
-        reg[code]={binId:newBin,name,owner:currentUser.username,createdAt:Date.now(),started:false,ended:false,joined:[currentUser.username]};
-        saveRegistry(reg); closeModal('new-game-modal'); openGame(code,newBin); return;
-      }
+    // Remote create failed — prompt to set API key and retry once
+    notify('⚠️ Remote create failed. You can set your JSONBin key to try again.');
+    if(confirm('Would you like to enter a JSONBin Master Key now to retry?')){
+      setJsonbinKeyPrompt();
+      const retry = await binCreate(initialState);
+      if(retry){ reg[code]={binId:retry,name,owner:currentUser.username,createdAt:Date.now(),started:false,ended:false,joined:[currentUser.username]}; saveRegistry(reg); closeModal('new-game-modal'); openGame(code,retry); return; }
+      notify('Still unable to create remote bin. Creating local-only game.');
     }
     // fallback to local-only
-    notify('⚠️ Created local-only game. You can upgrade later.');
     reg[code]={binId:null,name,owner:currentUser.username,createdAt:Date.now(),started:false,ended:false,joined:[currentUser.username],offline:true,gameState:null};
-    saveRegistry(reg);
-    closeModal('new-game-modal');
-    openGame(code,null);
-    return;
+    saveRegistry(reg); closeModal('new-game-modal'); openGame(code,null); return;
   }
 
   reg[code]={binId,name,owner:currentUser.username,createdAt:Date.now(),started:false,ended:false,joined:[currentUser.username]};
@@ -1398,6 +1407,13 @@ function updateRoomBar(code,binId){
       if(upBtn) upBtn.remove();
     }
   }
+
+  // Also add a small helper for setting JSONBin key (for troubleshooting online failures)
+  const keyBtnId = 'set-jsonbin-key-btn';
+  let keyBtn = document.getElementById(keyBtnId);
+  if(!keyBtn){
+    keyBtn = document.createElement('button'); keyBtn.id=keyBtnId; keyBtn.className='btn-header muted'; keyBtn.textContent='Set API Key'; keyBtn.onclick=setJsonbinKeyPrompt; roomBar.appendChild(keyBtn);
+  }
 }
 
 function copyRoomCode(){
@@ -1541,7 +1557,17 @@ async function upgradeToOnline(code){
   };
 
   const newBin = await binCreate(payload);
-  if(!newBin){ notify('❌ Upgrade failed — could not contact server'); return; }
+  if(!newBin){
+    // Try allowing the user to set a JSONBin key and retry once
+    notify('❌ Upgrade failed — could not contact server');
+    if(confirm('Upgrade failed. Enter a JSONBin Master Key to retry?')){
+      setJsonbinKeyPrompt();
+      const retryBin = await binCreate(payload);
+      if(retryBin){ entry.binId = retryBin; reg[code] = entry; saveRegistry(reg); await updateDirectory(code,retryBin,entry.name,entry.owner,entry.createdAt); if(currentGameId===code){ currentBinId = retryBin; updateRoomBar(code,retryBin); startSync(code,retryBin); } notify('✅ Game upgraded online'); return; }
+      notify('Upgrade still failed after retry');
+    }
+    return;
+  }
 
   // Save binId and push full state immediately
   entry.binId = newBin; reg[code] = entry; saveRegistry(reg);
