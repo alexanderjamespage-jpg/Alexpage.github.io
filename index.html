@@ -1510,8 +1510,24 @@ async function pullState(code,binId){
 // Attempt to create a JSONBin for an existing local-only game and switch it online
 async function upgradeToOnline(code){
   const reg = getRegistry();
-  const entry = reg[code];
-  if(!entry){ notify('Local game not found'); return; }
+  let entry = code ? reg[code] : null;
+  // If no direct entry, try current open game
+  if(!entry && currentGameId && reg[currentGameId]){ code = currentGameId; entry = reg[currentGameId]; }
+  // If still not found, look for any local-only entries
+  if(!entry){
+    const localGames = Object.entries(reg).filter(([,g])=>!g.binId || g.offline);
+    if(localGames.length===0){ notify('No local-only games found to upgrade'); return; }
+    if(localGames.length===1){ code = localGames[0][0]; entry = localGames[0][1]; }
+    else {
+      // Ask user to pick a code
+      const choices = localGames.map(([c,g])=>`${c} — ${g.name}`).join('\n');
+      const pick = prompt('Multiple local games found. Paste the room code to upgrade:\n\n'+choices);
+      if(!pick) { notify('Upgrade cancelled'); return; }
+      const pickCode = pick.trim().toUpperCase();
+      if(!reg[pickCode]){ notify('Code not found'); return; }
+      code = pickCode; entry = reg[pickCode];
+    }
+  }
   if(entry.binId){ notify('Game is already online'); return; }
   if(!confirm('Upgrade this local game to online so others can join?')) return;
 
