@@ -718,9 +718,9 @@ tr:hover td{background:#1e1d30;}
         </div>
         <div class="kings-toggle-row">
           <span>👑</span>
-          <div style="flex:1"><label style="font-size:.88rem;color:var(--white);cursor:pointer" for="kings-default-toggle">Kings Court (Default ON)</label><br><small style="color:var(--muted);font-size:.72rem">Top players face each other each round</small></div>
+          <div style="flex:1"><label style="font-size:.88rem;color:var(--white);cursor:pointer" for="kings-default-toggle">Kings Court (Default OFF)</label><br><small style="color:var(--muted);font-size:.72rem">Top players face each other each round</small></div>
           <label class="toggle-switch">
-            <input type="checkbox" id="kings-default-toggle" checked>
+            <input type="checkbox" id="kings-default-toggle">
             <span class="toggle-slider"></span>
           </label>
         </div>
@@ -937,7 +937,7 @@ let lastSyncTime  = null;
 
 // ── State ──
 let players=[], numCourts=2, numRounds=8, currentRound=0;
-let kingsActive=true, gameMode='doubles';
+let kingsActive=false, gameMode='doubles';
 let rounds=[], stats={};
 let gameEnded=false, gameName='Tournament';
 
@@ -1631,7 +1631,7 @@ function getStateObj(){
 }
 function restoreState(s){
   players=s.players||[];numCourts=s.numCourts||2;numRounds=s.numRounds||8;
-  currentRound=s.currentRound||0;kingsActive=s.kingsActive!==undefined?s.kingsActive:true;
+  currentRound=s.currentRound||0;kingsActive=s.kingsActive!==undefined?s.kingsActive:false;
   gameMode=s.gameMode||'doubles';rounds=s.rounds||[];stats=s.stats||{};
   gameEnded=s.gameEnded||false;
 }
