@@ -855,7 +855,7 @@ tr:hover td{background:#1e1d30;}
     <div class="modal-field"><label>Game Name</label>
       <input type="text" id="new-game-name" placeholder="Friday Night Pickleball" maxlength="40"></div>
       <div class="modal-field" style="margin-top:8px;">
-        <label style="font-size:.9rem;"><input type="checkbox" id="new-game-offline"> &nbsp;Create local-only (offline)</label>
+        <label style="font-size:.9rem;"><input type="checkbox" id="new-game-offline" checked> &nbsp;Create local-only (offline)</label>
       </div>
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="closeModal('new-game-modal')">Cancel</button>
@@ -1129,6 +1129,13 @@ async function createNewGame(){
     viewers:[currentUser.username],
     gameState:null
   };
+
+  // If user chose create local-only (default), skip remote create
+  const forceLocal = !!document.getElementById('new-game-offline')?.checked;
+  if (forceLocal) {
+    reg[code]={binId:null,name,owner:currentUser.username,createdAt:Date.now(),started:false,ended:false,joined:[currentUser.username],offline:true,gameState:null};
+    saveRegistry(reg); closeModal('new-game-modal'); openGame(code,null); return;
+  }
 
   const binId=await binCreate(initialState);
   if(!binId){
