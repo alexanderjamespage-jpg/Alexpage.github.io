@@ -19,17 +19,19 @@
 html{scroll-behavior:smooth}
 body{background:var(--dark);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;
   background-image:radial-gradient(ellipse at 20% 0%,#3C3B6E30 0%,transparent 60%),
-    radial-gradient(ellipse at 80% 100%,#B2223420 0%,transparent 60%);}
+    radial-gradient(ellipse at 80% 100%,#B2223420 0%,transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
 
+/* ── STARS ── */
 .stars-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
 .star-dot{position:absolute;width:2px;height:2px;background:var(--star);border-radius:50%;opacity:0;animation:twinkle 4s ease-in-out infinite;}
 @keyframes twinkle{0%,100%{opacity:0;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
 
-/* ── SCREENS ── */
+/* ── SCREEN SYSTEM ── */
 .screen{display:none;position:relative;z-index:1;}
 .screen.active{display:block;}
 
-/* ── AUTH ── */
+/* ══════════ AUTH SCREEN ══════════ */
 #auth-screen{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
 #auth-screen.active{display:flex;}
 .auth-hero{text-align:center;margin-bottom:32px;}
@@ -67,7 +69,7 @@ body{background:var(--dark);color:var(--text);font-family:'Barlow',sans-serif;mi
 .guest-btn:hover{border-color:var(--gold);color:var(--gold);}
 .auth-error{color:#e05252;font-size:.82rem;margin-top:8px;text-align:center;}
 
-/* ── LOBBY ── */
+/* ══════════ LOBBY SCREEN ══════════ */
 #lobby-screen{min-height:100vh;display:none;flex-direction:column;}
 #lobby-screen.active{display:flex;}
 .lobby-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
@@ -90,15 +92,6 @@ body{background:var(--dark);color:var(--text);font-family:'Barlow',sans-serif;mi
 .lobby-hero h2{font-family:'Anton',sans-serif;font-size:2.2rem;color:var(--white);
   letter-spacing:2px;margin-bottom:6px;}
 .lobby-hero p{color:var(--muted);font-size:.9rem;}
-
-/* SYNC INFO BOX */
-.sync-info-box{background:linear-gradient(135deg,#0d1a0d,#0a1509);border:1.5px solid var(--green);
-  border-radius:12px;padding:14px 18px;margin-bottom:24px;font-size:.82rem;line-height:1.7;}
-.sync-info-box h4{color:#5cdf8a;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
-.sync-info-box p{color:#7acc7a;}
-.sync-info-box strong{color:#5cdf8a;}
-
 .lobby-actions{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px;}
 @media(max-width:500px){.lobby-actions{grid-template-columns:1fr;}}
 .lobby-action-card{background:var(--card);border:1.5px solid var(--border);
@@ -130,7 +123,7 @@ body{background:var(--dark);color:var(--text);font-family:'Barlow',sans-serif;mi
 .gi-delete:hover{color:var(--ltred);}
 .empty-games{text-align:center;padding:40px;color:var(--muted);font-size:.9rem;}
 
-/* ── MODAL ── */
+/* ══════════ MODAL ══════════ */
 .modal-overlay{position:fixed;inset:0;background:#000000c0;z-index:5000;
   display:none;align-items:center;justify-content:center;padding:16px;}
 .modal-overlay.show{display:flex;}
@@ -155,13 +148,17 @@ body{background:var(--dark);color:var(--text);font-family:'Barlow',sans-serif;mi
 .modal-btn.primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px #B2223460;}
 .modal-btn.secondary{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
 .modal-btn.secondary:hover{border-color:var(--gold);color:var(--gold);}
-.join-code-input{font-family:'Anton',sans-serif;font-size:2rem;letter-spacing:8px;
+
+/* ══════════ JOIN MODAL ══════════ */
+.join-code-input{
+  font-family:'Anton',sans-serif;font-size:2rem;letter-spacing:8px;
   text-align:center;text-transform:uppercase;width:100%;
   background:#0f0e1a;border:2px solid var(--gold);
-  color:var(--gold);border-radius:10px;padding:14px;}
+  color:var(--gold);border-radius:10px;padding:14px;
+}
 .join-code-input:focus{outline:none;}
 
-/* ── TOURNAMENT HEADER ── */
+/* ══════════ HEADER (tournament) ══════════ */
 header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
   border-bottom:3px solid var(--gold);padding:11px 16px;
   display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200;
@@ -180,28 +177,17 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
   letter-spacing:1px;border-radius:6px;padding:6px 11px;cursor:pointer;
   transition:all .2s;white-space:nowrap;}
 .btn-header:hover{background:var(--gold);color:var(--dark);}
+.btn-header.active{background:var(--gold);color:var(--dark);}
 .btn-header.red{border-color:var(--ltred);color:var(--ltred);}
 .btn-header.red:hover{background:var(--ltred);color:#fff;}
 .btn-header.muted{border-color:var(--border);color:var(--muted);}
 .btn-header.muted:hover{border-color:var(--muted);color:var(--text);}
-
-/* ── SYNC STATUS BAR ── */
-.sync-bar{background:#0a0918;border-bottom:1px solid var(--border);
-  padding:6px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.75rem;}
 .sync-dot{width:8px;height:8px;border-radius:50%;background:#5cdf8a;
-  display:inline-block;animation:syncpulse 1.5s ease-in-out infinite;}
-.sync-dot.off{background:#e05252;animation:none;}
-.sync-dot.connecting{background:var(--gold);animation:syncpulse 1s ease-in-out infinite;}
-@keyframes syncpulse{50%{opacity:.2;}}
-#sync-label{color:var(--muted);}
-.sync-role-badge{background:#1a1929;border:1px solid var(--border);border-radius:10px;
-  padding:2px 9px;font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  letter-spacing:1px;font-size:.7rem;}
-.sync-role-badge.host{color:var(--gold);border-color:var(--gold);}
-.sync-role-badge.viewer{color:#7ab3ff;border-color:#3a5a9a;}
-.viewers-badge{margin-left:auto;display:flex;align-items:center;gap:5px;color:var(--muted);}
+  display:inline-block;animation:syncpulse 2s ease-in-out infinite;margin-right:4px;}
+@keyframes syncpulse{50%{opacity:.3;}}
+.sync-dot.off{background:var(--muted);animation:none;}
 
-/* ── ROOM BAR ── */
+/* ══════════ ROOM CODE BAR ══════════ */
 .room-bar{background:#0f0e1a;border-bottom:1px solid var(--border);
   padding:8px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .room-code-label{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;
@@ -214,8 +200,10 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
   border-radius:6px;padding:4px 10px;font-size:.75rem;cursor:pointer;
   font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;transition:all .2s;}
 .qr-btn:hover{border-color:var(--gold);color:var(--gold);}
+.viewers-badge{margin-left:auto;display:flex;align-items:center;gap:5px;
+  font-size:.75rem;color:var(--muted);}
 
-/* QR MODAL */
+/* ══════════ QR MODAL ══════════ */
 .qr-modal-content{text-align:center;}
 .qr-modal-content h2{margin-bottom:8px;}
 .qr-modal-content p{margin-bottom:20px;}
@@ -226,20 +214,10 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
 .qr-url{font-size:.75rem;color:var(--muted);word-break:break-all;
   background:#0f0e1a;padding:8px 12px;border-radius:8px;margin-bottom:16px;}
 
-/* ── APP LAYOUT ── */
+/* ══════════ APP LAYOUT ══════════ */
 .app{max-width:1100px;margin:0 auto;padding:16px 14px;position:relative;z-index:1;}
 
-/* ── VIEWER BANNER ── */
-.viewer-banner{background:linear-gradient(135deg,#0d1520,#0a1018);
-  border:2px solid #3a5a9a;border-radius:12px;padding:12px 18px;margin-bottom:16px;
-  display:flex;align-items:center;gap:12px;}
-.viewer-banner .vb-icon{font-size:1.6rem;}
-.viewer-banner .vb-text{flex:1;}
-.viewer-banner .vb-title{font-family:'Barlow Condensed',sans-serif;font-size:1rem;
-  font-weight:700;color:#7ab3ff;letter-spacing:1px;}
-.viewer-banner .vb-sub{font-size:.75rem;color:var(--muted);margin-top:2px;}
-
-/* ── SETUP ── */
+/* ══════════ SETUP SCREEN ══════════ */
 #setup-screen{display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 0;}
 .setup-hero{text-align:center;}
 .setup-hero h1{font-family:'Anton',sans-serif;font-size:2.6rem;
@@ -290,6 +268,8 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
 .mode-btn.active{background:var(--blue);border-color:var(--gold);color:var(--gold);}
 .kings-toggle-row{display:flex;align-items:center;gap:10px;padding:10px 12px;
   background:#0f0e1a;border:1.5px solid var(--border);border-radius:10px;margin-bottom:14px;}
+.kings-toggle-row label{color:var(--white);font-size:.85rem;flex:1;}
+.kings-toggle-row small{color:var(--muted);font-size:.72rem;}
 .toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0;}
 .toggle-switch input{opacity:0;width:0;height:0;}
 .toggle-slider{position:absolute;cursor:pointer;inset:0;background:#2e2d4a;
@@ -299,7 +279,7 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
 .toggle-switch input:checked + .toggle-slider{background:var(--gold);}
 .toggle-switch input:checked + .toggle-slider:before{transform:translateX(20px);background:var(--dark);}
 
-/* ── ROUND PAGER ── */
+/* ══════════ ROUND PAGER ══════════ */
 .round-pager-wrap{display:flex;align-items:center;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
 .round-pager{display:flex;align-items:center;gap:4px;overflow-x:auto;padding-bottom:2px;flex:1;}
 .round-pager::-webkit-scrollbar{height:3px;}
@@ -329,7 +309,7 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
   font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:900;
   padding:3px 10px;border-radius:20px;letter-spacing:1px;}
 
-/* ── LOCATOR ── */
+/* ══════════ COURT LOCATOR ══════════ */
 .locator-card{background:var(--card);border:1px solid var(--border);
   border-radius:12px;padding:14px 16px;margin-bottom:14px;}
 .locator-card h3{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;
@@ -346,14 +326,7 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
 .locator-result strong{color:var(--gold);}
 .locator-result em{color:#7ab3ff;}
 
-/* ── COURTS ── */
-.sitout-section{background:var(--card);border:1px solid var(--border);
-  border-radius:10px;padding:12px 14px;margin-bottom:14px;}
-.sitout-section h4{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;
-  color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
-.sitout-chips{display:flex;gap:7px;flex-wrap:wrap;}
-.sitout-chip{background:#1a1020;border:1.5px solid #3a2a40;border-radius:20px;
-  padding:5px 12px;font-size:.8rem;color:#9988bb;font-weight:500;}
+/* ══════════ COURTS GRID ══════════ */
 .courts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:20px;}
 .court-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .2s,transform .2s;}
 .court-card:hover{box-shadow:0 6px 28px #00000050;transform:translateY(-2px);}
@@ -385,11 +358,23 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
 .score-box{width:50px;height:44px;background:#0f0e1a;border:2px solid var(--border);
   border-radius:8px;color:var(--text);font-size:1.4rem;font-weight:700;
   text-align:center;font-family:'Anton',sans-serif;transition:border-color .2s;
-  -moz-appearance:textfield;appearance:textfield;}
+  -moz-appearance:textfield;}
 .score-box::-webkit-outer-spin-button,.score-box::-webkit-inner-spin-button{-webkit-appearance:none;}
+.score-box{appearance:textfield;}
 .score-box:focus{outline:none;border-color:var(--gold);}
 .score-box.winning{border-color:#5cdf8a;background:#0f2a16;color:#5cdf8a;}
 .score-box[readonly]{opacity:.8;cursor:default;}
+
+/* ══════════ SITOUT ══════════ */
+.sitout-section{background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;margin-bottom:14px;}
+.sitout-section h4{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;
+  color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.sitout-chips{display:flex;gap:7px;flex-wrap:wrap;}
+.sitout-chip{background:#1a1020;border:1.5px solid #3a2a40;border-radius:20px;
+  padding:5px 12px;font-size:.8rem;color:#9988bb;font-weight:500;}
+
+/* ══════════ SAVE ROUND BUTTON ══════════ */
 .save-round-btn{width:100%;background:linear-gradient(135deg,var(--blue),var(--dkblue));
   border:2.5px solid var(--gold);color:var(--gold);border-radius:12px;padding:15px 24px;
   font-size:1.1rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;
@@ -403,7 +388,7 @@ header.t-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
 .save-round-btn.all-done{background:linear-gradient(135deg,#1a3a20,#0f2a16);
   border-color:#2d9e5f;color:#5cdf8a;cursor:default;}
 
-/* ── STANDINGS ── */
+/* ══════════ STANDINGS ══════════ */
 .standings-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px;}
 .standings-head{background:linear-gradient(135deg,var(--blue),var(--dkblue));
   border-bottom:2px solid var(--gold);padding:12px 18px;display:flex;align-items:center;gap:10px;}
@@ -425,6 +410,8 @@ tr:hover td{background:#1e1d30;}
 .td-diff.pos{color:var(--gold);}.td-diff.neg{color:#e05252;}
 .top-row td{background:#1a1025!important;}
 .top-row td:first-child{border-left:3px solid var(--gold);}
+
+/* ══════════ WINNER BANNER ══════════ */
 .winner-banner{background:linear-gradient(135deg,#2a1800,#1a0e00);
   border:2px solid var(--gold);border-radius:18px;padding:28px;
   text-align:center;margin-bottom:20px;animation:glow 2s ease-in-out infinite alternate;}
@@ -437,7 +424,7 @@ tr:hover td{background:#1e1d30;}
 .w-stat .val{font-family:'Anton',sans-serif;font-size:1.8rem;color:var(--white);}
 .w-stat .lbl{font-size:.62rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
 
-/* ── TV MODE ── */
+/* ══════════ TV OVERLAY ══════════ */
 #tv-overlay{display:none;position:fixed;inset:0;background:var(--dark);z-index:9999;overflow:hidden;}
 #tv-overlay.show{display:flex;flex-direction:column;}
 .tv-header{background:linear-gradient(135deg,var(--blue),var(--dkblue));
@@ -484,7 +471,7 @@ tr:hover td{background:#1e1d30;}
   padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;
   font-weight:700;color:#9988bb;}
 
-/* ── RESULTS ── */
+/* ══════════ RESULTS OVERLAY ══════════ */
 #results-overlay{display:none;position:fixed;inset:0;z-index:8000;background:var(--dark);overflow-y:auto;}
 #results-overlay.show{display:block;}
 .results-page{max-width:860px;margin:0 auto;padding:28px 16px 60px;}
@@ -557,15 +544,23 @@ tr:hover td{background:#1e1d30;}
   border-radius:10px;padding:10px;font-family:'Barlow Condensed',sans-serif;
   font-size:.95rem;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all .2s;text-align:center;}
 .results-back-btn:hover{border-color:var(--gold);color:var(--gold);}
+.btn-header.results-btn{border-color:var(--gold)!important;color:var(--gold)!important;
+  animation:results-pulse 2s ease-in-out infinite;}
+@keyframes results-pulse{0%,100%{box-shadow:0 0 0 0 #FFD70000;}50%{box-shadow:0 0 0 6px #FFD70030;}}
 
-/* ── NOTIF ── */
+/* ══════════ NOTIF ══════════ */
 .notif{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);
   background:linear-gradient(135deg,var(--blue),var(--dkblue));
   border:1px solid var(--gold);color:#fff;border-radius:10px;padding:10px 20px;
   font-size:.88rem;font-weight:600;font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px;
   box-shadow:0 8px 32px #00000080;opacity:0;transition:transform .3s,opacity .3s;
-  z-index:9999;max-width:90%;text-align:center;}
+  z-index:999;max-width:90%;text-align:center;white-space:nowrap;}
 .notif.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* ══════════ LOADING ══════════ */
+.sync-spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);
+  border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
 @media(max-width:600px){
   header.t-header{padding:9px 12px;}
@@ -589,11 +584,13 @@ tr:hover td{background:#1e1d30;}
 
 <div class="stars-bg" id="stars-bg"></div>
 
-<!-- AUTH SCREEN -->
+<!-- ══════════════════════════════
+     AUTH SCREEN
+══════════════════════════════ -->
 <div id="auth-screen" class="active">
   <div class="auth-hero">
     <h1>🥒 USA PICKLEBALL</h1>
-    <p>Tournament Manager · Real-Time Cross-Device Sync</p>
+    <p>Tournament Manager · Multi-Device · Live Sync</p>
   </div>
   <div class="auth-card">
     <div class="auth-tabs">
@@ -618,7 +615,9 @@ tr:hover td{background:#1e1d30;}
   </div>
 </div>
 
-<!-- LOBBY SCREEN -->
+<!-- ══════════════════════════════
+     LOBBY SCREEN
+══════════════════════════════ -->
 <div id="lobby-screen">
   <div class="lobby-header">
     <div class="lobby-logo">🥒 PICKLEBALL</div>
@@ -633,24 +632,16 @@ tr:hover td{background:#1e1d30;}
       <h2>🏆 Tournament Lobby</h2>
       <p>Create a new game or join an existing one with a room code</p>
     </div>
-
-    <div class="sync-info-box">
-      <h4>📡 Real-Time Cross-Device Sync</h4>
-      <p><strong>Host:</strong> Create a game, set up players, enter scores from any device.<br>
-      <strong>Viewers:</strong> Scan the QR code or enter the room code to watch live on any phone or tablet.<br>
-      Scores, rounds, and standings update automatically every 2 seconds across all devices.</p>
-    </div>
-
     <div class="lobby-actions">
       <div class="lobby-action-card" onclick="openNewGameModal()">
         <div class="lac-icon">🆕</div>
         <div class="lac-title">New Game</div>
-        <div class="lac-sub">Create a tournament room others can join live</div>
+        <div class="lac-sub">Create a tournament room others can join</div>
       </div>
       <div class="lobby-action-card" onclick="openJoinModal()">
         <div class="lac-icon">🔗</div>
         <div class="lac-title">Join Game</div>
-        <div class="lac-sub">Enter a room code or scan QR to follow live</div>
+        <div class="lac-sub">Enter a room code or scan QR to spectate</div>
       </div>
     </div>
     <div class="games-list-title">Your Games</div>
@@ -658,8 +649,11 @@ tr:hover td{background:#1e1d30;}
   </div>
 </div>
 
-<!-- TOURNAMENT SCREEN -->
+<!-- ══════════════════════════════
+     TOURNAMENT SCREEN
+══════════════════════════════ -->
 <div id="tournament-wrapper" style="display:none">
+  <!-- Header -->
   <header class="t-header">
     <div class="logo-wrap">
       <div>
@@ -668,22 +662,14 @@ tr:hover td{background:#1e1d30;}
       </div>
     </div>
     <div class="header-right">
+      <span id="sync-indicator"><span class="sync-dot off" id="sync-dot"></span><span id="sync-label" style="font-size:.72rem;color:var(--muted)">offline</span></span>
       <div class="round-badge" id="round-badge">Round 1 of 8</div>
       <button class="btn-header" onclick="openTVMode()">📺 TV</button>
-      <button class="btn-header" onclick="openQRModal()">📱 QR</button>
-      <button class="btn-header" id="host-add-round-btn" onclick="addRound()" style="display:none">+ Round</button>
+      <button class="btn-header" id="qr-header-btn" onclick="openQRModal()">📱 QR</button>
+      <button class="btn-header" onclick="addRound()">+ Round</button>
       <button class="btn-header muted" onclick="backToLobby()">← Lobby</button>
     </div>
   </header>
-
-  <!-- Sync status bar -->
-  <div class="sync-bar">
-    <span class="sync-dot off" id="sync-dot"></span>
-    <span id="sync-label">Connecting…</span>
-    <span class="sync-role-badge" id="sync-role-badge">—</span>
-    <span id="last-sync-time" style="color:var(--muted);font-size:.7rem;"></span>
-    <span class="viewers-badge" id="viewers-badge" style="margin-left:auto">👁 —</span>
-  </div>
 
   <!-- Room bar -->
   <div class="room-bar" id="room-bar">
@@ -691,20 +677,12 @@ tr:hover td{background:#1e1d30;}
     <span class="room-code" id="room-code-display" onclick="copyRoomCode()" title="Click to copy">----</span>
     <span class="copy-hint">· tap to copy</span>
     <button class="qr-btn" onclick="openQRModal()">Show QR</button>
+    <span class="viewers-badge" id="viewers-badge">👁 1 viewer</span>
   </div>
 
   <div class="app">
-    <!-- Viewer banner (shown to non-hosts) -->
-    <div class="viewer-banner" id="viewer-banner" style="display:none">
-      <div class="vb-icon">👁</div>
-      <div class="vb-text">
-        <div class="vb-title">Viewer Mode — Live Updates</div>
-        <div class="vb-sub">You're watching this tournament live. Scores and standings update automatically every 2 seconds.</div>
-      </div>
-    </div>
-
-    <!-- Setup -->
-    <div id="setup-screen" style="display:none">
+    <!-- Setup (inside tournament wrapper) -->
+    <div id="setup-screen">
       <div class="setup-hero">
         <h1>🏆 NEW TOURNAMENT</h1>
         <p>Set up players and format</p>
@@ -718,7 +696,7 @@ tr:hover td{background:#1e1d30;}
         </div>
         <div class="kings-toggle-row">
           <span>👑</span>
-          <div style="flex:1"><label style="font-size:.88rem;color:var(--white);cursor:pointer" for="kings-default-toggle">Kings Court (Default ON)</label><br><small style="color:var(--muted);font-size:.72rem">Top players face each other each round</small></div>
+          <div style="flex:1"><label style="font-size:.88rem;color:var(--white);cursor:pointer" for="kings-default-toggle">Kings Court (Default ON)</label><br><small>Top players face each other each round</small></div>
           <label class="toggle-switch">
             <input type="checkbox" id="kings-default-toggle" checked>
             <span class="toggle-slider"></span>
@@ -741,13 +719,14 @@ tr:hover td{background:#1e1d30;}
       </div>
     </div>
 
-    <!-- Play area -->
+    <!-- Tournament play area -->
     <div id="play-area" style="display:none">
+      <!-- Round Pager -->
       <div class="round-pager-wrap">
         <button class="pager-btn" id="prev-btn" onclick="prevRound()">◀</button>
         <div class="round-pager" id="round-pager"></div>
         <button class="pager-btn" id="next-btn" onclick="nextRound()">▶</button>
-        <button class="pager-btn add" id="pager-add-btn" onclick="addRound()" style="display:none">＋</button>
+        <button class="pager-btn add" onclick="addRound()">＋</button>
       </div>
 
       <div class="round-title-bar">
@@ -796,7 +775,7 @@ tr:hover td{background:#1e1d30;}
   </div>
 </div>
 
-<!-- TV OVERLAY -->
+<!-- ══════ TV OVERLAY ══════ -->
 <div id="tv-overlay">
   <div class="tv-header">
     <div class="tv-logo">🥒 USA PICKLEBALL</div>
@@ -806,7 +785,7 @@ tr:hover td{background:#1e1d30;}
   <div class="tv-body" id="tv-body"></div>
 </div>
 
-<!-- RESULTS OVERLAY -->
+<!-- ══════ RESULTS OVERLAY ══════ -->
 <div id="results-overlay">
   <div class="fireworks" id="fireworks"></div>
   <div class="results-page">
@@ -847,13 +826,17 @@ tr:hover td{background:#1e1d30;}
   </div>
 </div>
 
-<!-- MODALS -->
+<!-- ══════ MODALS ══════ -->
+<!-- New Game Modal -->
 <div class="modal-overlay" id="new-game-modal">
   <div class="modal">
     <h2>🆕 New Tournament</h2>
-    <p class="modal-sub">Give your game a name. Others join with the room code from any device.</p>
+    <p class="modal-sub">Give your game a name. Others can join with the room code.</p>
     <div class="modal-field"><label>Game Name</label>
       <input type="text" id="new-game-name" placeholder="Friday Night Pickleball" maxlength="40"></div>
+    <div class="modal-field" style="margin-top:8px;">
+      <label style="font-size:.9rem;"><input type="checkbox" id="new-game-offline"> &nbsp;Run offline (local only)</label>
+    </div>
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="closeModal('new-game-modal')">Cancel</button>
       <button class="modal-btn primary" onclick="createNewGame()">Create Game →</button>
@@ -861,30 +844,32 @@ tr:hover td{background:#1e1d30;}
   </div>
 </div>
 
+<!-- Join Game Modal -->
 <div class="modal-overlay" id="join-game-modal">
   <div class="modal">
     <h2>🔗 Join a Game</h2>
-    <p class="modal-sub">Enter the 6-character room code from the host. You'll see live updates automatically.</p>
+    <p class="modal-sub">Enter the 6-character room code from the host device.</p>
     <div class="modal-field">
       <input class="join-code-input" type="text" id="join-code-input" maxlength="6" placeholder="ABC123" oninput="this.value=this.value.toUpperCase()">
     </div>
     <div class="auth-error" id="join-error"></div>
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="closeModal('join-game-modal')">Cancel</button>
-      <button class="modal-btn primary" onclick="doJoinGame()">Join & Watch Live →</button>
+      <button class="modal-btn primary" onclick="doJoinGame()">Join →</button>
     </div>
   </div>
 </div>
 
+<!-- QR Modal -->
 <div class="modal-overlay" id="qr-modal">
   <div class="modal">
     <div class="qr-modal-content">
-      <h2>📱 Scan to Join Live</h2>
-      <p class="modal-sub">Any device on any network can scan to watch this tournament live</p>
+      <h2>📱 Scan to Join</h2>
+      <p class="modal-sub">Any device can scan to view this game live</p>
       <div id="qr-code-container"><div id="qr-code"></div></div>
       <div class="qr-code-text" id="qr-code-text">------</div>
       <div class="qr-url" id="qr-url-display"></div>
-      <p style="font-size:.8rem;color:var(--muted);">Updates sync every 2 seconds — works on any phone or tablet</p>
+      <p style="font-size:.8rem;color:var(--muted);">Share this code or URL so others can follow along</p>
     </div>
     <div class="modal-actions">
       <button class="modal-btn secondary" onclick="closeModal('qr-modal')">Close</button>
@@ -896,657 +881,464 @@ tr:hover td{background:#1e1d30;}
 <div class="notif" id="notif"></div>
 
 <script>
-// ════════════════════════════════════════════════════════════
-//  PICKLEBALL TOURNAMENT MANAGER
-//  Cross-device sync via JSONBin.io (free public API)
-//  Auth stays local (localStorage), game state goes to cloud
-// ════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════
+//  SIMPLE LOCAL "AUTH" + MULTI-GAME STORAGE
+//  Uses localStorage as a local "database" 
+//  with room codes for cross-device sync via
+//  polling a shared key (simulated real-time)
+// ═══════════════════════════════════════════════
 
-// ── JSONBin config (free tier, no account needed for reads) ──
-// We use a master bin that maps roomCode → binId
-// Each game gets its own bin for state
-const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
-// Free API key — rate limited but fine for small tournaments
-const JSONBIN_KEY = '$2a$10$8K1p/a.5B3uCj8HoVLimvOVMhgr1jLtMDPFUDumP7DW.0MjDcLWQ6';
-
-// ── Local storage keys ──
-const DB_KEY      = 'pkl_users';
-const GAMES_KEY   = 'pkl_games';   // local index: roomCode → {binId, name, owner, …}
+const DB_KEY   = 'pkl_users';
+const GAMES_KEY = 'pkl_games';
 const SESSION_KEY = 'pkl_session';
 
-let currentUser   = null;
-let currentGameId = null;   // roomCode
-let currentBinId  = null;   // JSONBin bin ID for this game
-let isHost        = false;
-let syncInterval  = null;
-let lastSyncEtag  = '';
-let lastSyncTime  = null;
+let currentUser = null;
+let currentGameId = null;
+let syncInterval = null;
+let lastSyncHash = '';
+let isHost = false;
+let viewerCount = 1;
 
-// ── State ──
-let players=[], numCourts=2, numRounds=8, currentRound=0;
-let kingsActive=true, gameMode='doubles';
-let rounds=[], stats={};
-let gameEnded=false, gameName='Tournament';
-
-// ════════════════════════════════════════════════
-//  JSONBIN HELPERS
-// ════════════════════════════════════════════════
-async function binCreate(data) {
-  try {
-    const r = await fetch(`${JSONBIN_BASE}/b`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_KEY,
-        'X-Bin-Private': 'false',
-        'X-Bin-Name': 'pkl_'+Date.now()
-      },
-      body: JSON.stringify(data)
-    });
-    if (!r.ok) { const t = await r.text(); console.error('binCreate fail:', t); return null; }
-    const j = await r.json();
-    return j.metadata?.id || null;
-  } catch(e) { console.error('binCreate error:', e); return null; }
+// ── LOCAL DB HELPERS ──
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(DB_KEY)||'{}'); } catch{return{};}
 }
-
-async function binGet(binId) {
-  try {
-    const r = await fetch(`${JSONBIN_BASE}/b/${binId}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_KEY }
-    });
-    if (!r.ok) return null;
-    const j = await r.json();
-    return j.record || null;
-  } catch(e) { return null; }
-}
-
-async function binUpdate(binId, data) {
-  try {
-    const r = await fetch(`${JSONBIN_BASE}/b/${binId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_KEY
-      },
-      body: JSON.stringify(data)
-    });
-    return r.ok;
-  } catch(e) { return false; }
-}
-
-// ════════════════════════════════════════════════
-//  LOCAL "REGISTRY" — maps roomCode → bin metadata
-//  Stored in localStorage so you can find your games
-// ════════════════════════════════════════════════
-function getRegistry() {
+function saveUsers(u) { localStorage.setItem(DB_KEY, JSON.stringify(u)); }
+function getGames() {
   try { return JSON.parse(localStorage.getItem(GAMES_KEY)||'{}'); } catch{return{};}
 }
-function saveRegistry(r) { localStorage.setItem(GAMES_KEY, JSON.stringify(r)); }
+function saveGames(g) { localStorage.setItem(GAMES_KEY, JSON.stringify(g)); }
+function getSession() {
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY)||'null'); } catch{return null;}
+}
+function saveSession(s) {
+  if (s) localStorage.setItem(SESSION_KEY, JSON.stringify(s));
+  else localStorage.removeItem(SESSION_KEY);
+}
 
-// ── Room code stored in URL so viewers can bookmark/scan ──
+// ── ROOM CODE ──
 function genRoomCode() {
-  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let c='';for(let i=0;i<6;i++) c+=chars[Math.floor(Math.random()*chars.length)];
-  return c;
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for (let i=0;i<6;i++) code += chars[Math.floor(Math.random()*chars.length)];
+  return code;
 }
 
-// ════════════════════════════════════════════════
-//  AUTH (local only — no passwords sent to cloud)
-// ════════════════════════════════════════════════
-function getUsers(){try{return JSON.parse(localStorage.getItem(DB_KEY)||'{}');}catch{return{};}}
-function saveUsers(u){localStorage.setItem(DB_KEY,JSON.stringify(u));}
-function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null');}catch{return null;}}
-function saveSession(s){if(s)localStorage.setItem(SESSION_KEY,JSON.stringify(s));else localStorage.removeItem(SESSION_KEY);}
-
-function switchAuthTab(tab){
-  document.getElementById('tab-login').classList.toggle('active',tab==='login');
-  document.getElementById('tab-register').classList.toggle('active',tab==='register');
-  document.getElementById('login-form').style.display=tab==='login'?'block':'none';
-  document.getElementById('register-form').style.display=tab==='register'?'block':'none';
+// ── STARS ──
+function initStars() {
+  const bg = document.getElementById('stars-bg');
+  for (let i=0;i<40;i++) {
+    const s = document.createElement('div'); s.className = 'star-dot';
+    s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    s.style.animationDuration = (2+Math.random()*4)+'s'; bg.appendChild(s);
+  }
 }
 
-function doLogin(){
-  const username=document.getElementById('login-user').value.trim().toLowerCase();
-  const pass=document.getElementById('login-pass').value;
-  document.getElementById('login-error').textContent='';
-  if(!username||!pass){document.getElementById('login-error').textContent='Fill in all fields';return;}
-  const users=getUsers();
-  if(!users[username]){document.getElementById('login-error').textContent='Account not found';return;}
-  if(users[username].pass!==btoa(pass)){document.getElementById('login-error').textContent='Wrong password';return;}
-  loginAs({username,displayName:users[username].displayName,isGuest:false});
+// ═══════════════════════
+//  AUTH
+// ═══════════════════════
+function switchAuthTab(tab) {
+  document.getElementById('tab-login').classList.toggle('active', tab==='login');
+  document.getElementById('tab-register').classList.toggle('active', tab==='register');
+  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
+  document.getElementById('register-form').style.display = tab==='register'?'block':'none';
 }
 
-function doRegister(){
-  const username=document.getElementById('reg-user').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
-  const display=document.getElementById('reg-display').value.trim()||username;
-  const pass=document.getElementById('reg-pass').value;
-  document.getElementById('reg-error').textContent='';
-  if(!username||!pass){document.getElementById('reg-error').textContent='Fill in all fields';return;}
-  if(username.length<2){document.getElementById('reg-error').textContent='Username too short';return;}
-  if(pass.length<4){document.getElementById('reg-error').textContent='Password too short (4+ chars)';return;}
-  const users=getUsers();
-  if(users[username]){document.getElementById('reg-error').textContent='Username taken';return;}
-  users[username]={pass:btoa(pass),displayName:display};
+function doLogin() {
+  const username = document.getElementById('login-user').value.trim().toLowerCase();
+  const pass = document.getElementById('login-pass').value;
+  document.getElementById('login-error').textContent = '';
+  if (!username||!pass) { document.getElementById('login-error').textContent='Fill in all fields'; return; }
+  const users = getUsers();
+  if (!users[username]) { document.getElementById('login-error').textContent='Account not found'; return; }
+  if (users[username].pass !== btoa(pass)) { document.getElementById('login-error').textContent='Wrong password'; return; }
+  loginAs({username, displayName:users[username].displayName, isGuest:false});
+}
+
+function doRegister() {
+  const username = document.getElementById('reg-user').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+  const display = document.getElementById('reg-display').value.trim() || username;
+  const pass = document.getElementById('reg-pass').value;
+  document.getElementById('reg-error').textContent = '';
+  if (!username||!pass) { document.getElementById('reg-error').textContent='Fill in all fields'; return; }
+  if (username.length<2) { document.getElementById('reg-error').textContent='Username too short'; return; }
+  if (pass.length<4) { document.getElementById('reg-error').textContent='Password too short (4+ chars)'; return; }
+  const users = getUsers();
+  if (users[username]) { document.getElementById('reg-error').textContent='Username taken'; return; }
+  users[username] = {pass:btoa(pass), displayName:display, games:[]};
   saveUsers(users);
-  loginAs({username,displayName:display,isGuest:false});
+  loginAs({username, displayName:display, isGuest:false});
 }
 
-function doGuest(){
-  const gid='guest_'+(Date.now()%10000);
-  loginAs({username:gid,displayName:'Guest',isGuest:true});
+function doGuest() {
+  const gid = 'guest_'+(Date.now()%10000);
+  loginAs({username:gid, displayName:'Guest', isGuest:true});
 }
 
-function loginAs(user){
-  currentUser=user;saveSession(user);showLobby();
+function loginAs(user) {
+  currentUser = user;
+  saveSession(user);
+  showLobby();
 }
 
-function doLogout(){
-  currentUser=null;saveSession(null);stopSync();currentGameId=null;currentBinId=null;
+function doLogout() {
+  currentUser = null; saveSession(null);
+  stopSync(); currentGameId = null;
   document.getElementById('lobby-screen').classList.remove('active');
   document.getElementById('lobby-screen').style.display='none';
   document.getElementById('auth-screen').classList.add('active');
   document.getElementById('auth-screen').style.display='flex';
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  LOBBY
-// ════════════════════════════════════════════════
-function showLobby(){
+// ═══════════════════════
+function showLobby() {
   document.getElementById('auth-screen').classList.remove('active');
   document.getElementById('auth-screen').style.display='none';
   document.getElementById('tournament-wrapper').style.display='none';
   document.getElementById('lobby-screen').style.display='flex';
   document.getElementById('lobby-screen').classList.add('active');
-  document.getElementById('results-overlay').classList.remove('show');
 
-  document.getElementById('user-avatar').textContent=currentUser.displayName.charAt(0).toUpperCase();
-  document.getElementById('user-name-display').textContent=currentUser.displayName;
+  const avatar = document.getElementById('user-avatar');
+  const nameEl = document.getElementById('user-name-display');
+  avatar.textContent = currentUser.displayName.charAt(0).toUpperCase();
+  nameEl.textContent = currentUser.displayName;
 
   renderGamesList();
 
-  // Check URL for room code (QR scan)
-  const params=new URLSearchParams(window.location.search);
-  const rc=params.get('room');
-  if(rc) setTimeout(()=>joinGameByCode(rc.toUpperCase()),400);
+  // Check URL for room code (QR scan join)
+  const params = new URLSearchParams(window.location.search);
+  const rc = params.get('room');
+  if (rc) { setTimeout(()=>joinGameByCode(rc.toUpperCase()), 300); }
 }
 
-function renderGamesList(){
-  const reg=getRegistry();
-  const list=document.getElementById('games-list');
-  const mine=Object.entries(reg)
-    .filter(([,g])=>g.owner===currentUser.username||g.joined?.includes(currentUser.username))
-    .sort((a,b)=>b[1].createdAt-a[1].createdAt);
-  if(!mine.length){list.innerHTML='<div class="empty-games">No games yet. Create one above!</div>';return;}
-  list.innerHTML=mine.map(([code,g])=>{
-    const status=g.ended?'done':g.started?'active':'lobby';
-    const statusText=g.ended?'Finished':g.started?'In Progress':'Setting Up';
-    return`<div class="game-item" onclick="openGame('${code}','${g.binId}')">
+function renderGamesList() {
+  const games = getGames();
+  const list = document.getElementById('games-list');
+  const myGames = Object.entries(games)
+    .filter(([id,g]) => g.owner===currentUser.username || g.joinedBy?.includes(currentUser.username))
+    .sort((a,b) => b[1].createdAt - a[1].createdAt);
+
+  if (!myGames.length) {
+    list.innerHTML = '<div class="empty-games">No games yet. Create one above!</div>'; return;
+  }
+  list.innerHTML = myGames.map(([id,g]) => {
+    const status = g.ended ? 'done' : (g.started ? 'active' : 'lobby');
+    const statusText = g.ended ? 'Finished' : (g.started ? 'In Progress' : 'Setting Up');
+    const rounds = g.state?.numRounds || 0;
+    const players = g.state?.players?.length || 0;
+    return `<div class="game-item" onclick="openGame('${id}')">
       <div class="gi-icon">${status==='done'?'🏆':status==='active'?'🎾':'🆕'}</div>
       <div class="gi-info">
         <div class="gi-name">${esc(g.name)}</div>
-        <div class="gi-meta">Code: <strong style="color:var(--gold)">${code}</strong> · Host: ${esc(g.owner)}</div>
+        <div class="gi-meta">Code: <strong style="color:var(--gold)">${g.roomCode}</strong> · ${players} players · ${rounds} rounds · Host: ${esc(g.owner)}</div>
       </div>
       <div class="gi-status ${status}">${statusText}</div>
-      ${g.owner===currentUser.username?`<button class="gi-delete" onclick="event.stopPropagation();deleteGame('${code}')" title="Delete">🗑</button>`:''}
+      ${g.owner===currentUser.username?`<button class="gi-delete" onclick="event.stopPropagation();deleteGame('${id}')" title="Delete">🗑</button>`:''}
     </div>`;
   }).join('');
 }
 
-function openNewGameModal(){document.getElementById('new-game-name').value='';openModal('new-game-modal');}
-function openJoinModal(){document.getElementById('join-code-input').value='';document.getElementById('join-error').textContent='';openModal('join-game-modal');}
-
-async function createNewGame(){
-  const name=document.getElementById('new-game-name').value.trim()||'My Tournament';
-  const reg=getRegistry();
-  let code;do{code=genRoomCode();}while(reg[code]);
-
-  notify('Creating game…');
-
-  const initialState={
-    roomCode:code, name, owner:currentUser.username,
+function openNewGameModal() {
+  document.getElementById('new-game-name').value = '';
+  openModal('new-game-modal');
+}
+function openJoinModal() {
+  document.getElementById('join-code-input').value = '';
+  document.getElementById('join-error').textContent = '';
+  openModal('join-game-modal');
+}
+function createNewGame() {
+  const name = document.getElementById('new-game-name').value.trim() || 'My Tournament';
+  const id = 'game_'+Date.now();
+  const games = getGames();
+  let code; do { code=genRoomCode(); } while(Object.values(games).some(g=>g.roomCode===code));
+  // ensure we have a user (auto-guest if none)
+  if (!currentUser) doGuest();
+  const offline = !!document.getElementById('new-game-offline')?.checked;
+  games[id] = {
+    id, name, roomCode:code, owner:currentUser.username,
     createdAt:Date.now(), started:false, ended:false,
-    viewers:[currentUser.username],
-    gameState:null
+    joinedBy:[currentUser.username], state:null, offline: !!offline
   };
-
-  const binId=await binCreate(initialState);
-  if(!binId){notify('❌ Could not create game. Check your connection.');return;}
-
-  reg[code]={binId,name,owner:currentUser.username,createdAt:Date.now(),started:false,ended:false,joined:[currentUser.username]};
-  saveRegistry(reg);
+  saveGames(games);
   closeModal('new-game-modal');
-  openGame(code,binId);
+  openGame(id);
 }
-
-function deleteGame(code){
-  if(!confirm('Remove this game from your list?'))return;
-  const reg=getRegistry();delete reg[code];saveRegistry(reg);renderGamesList();
+function deleteGame(id) {
+  if (!confirm('Delete this game?')) return;
+  const games = getGames(); delete games[id]; saveGames(games); renderGamesList();
 }
-
-function doJoinGame(){
-  const code=document.getElementById('join-code-input').value.trim().toUpperCase();
-  document.getElementById('join-error').textContent='';
-  if(code.length!==6){document.getElementById('join-error').textContent='Enter a 6-character code';return;}
+function doJoinGame() {
+  const code = document.getElementById('join-code-input').value.trim().toUpperCase();
+  document.getElementById('join-error').textContent = '';
+  if (code.length!==6) { document.getElementById('join-error').textContent='Enter a 6-character code'; return; }
   joinGameByCode(code);
 }
-
-async function joinGameByCode(code){
-  // First check local registry
-  const reg=getRegistry();
-  if(reg[code]){
-    closeModal('join-game-modal');
-    openGame(code,reg[code].binId);
-    return;
+function joinGameByCode(code) {
+  const games = getGames();
+  const entry = Object.entries(games).find(([,g])=>g.roomCode===code);
+  if (!entry) { document.getElementById('join-error').textContent='Room not found'; return; }
+  const [id, game] = entry;
+  if (!game.joinedBy) game.joinedBy=[];
+  if (!game.joinedBy.includes(currentUser.username)) {
+    game.joinedBy.push(currentUser.username);
+    games[id]=game; saveGames(games);
   }
-
-  // Need to find the bin — we search by fetching a lookup bin
-  // Since JSONBin doesn't have search, we use a "directory" approach:
-  // The room code IS the bin lookup key stored in a fixed master bin
-  notify('🔍 Looking up game…');
-  document.getElementById('join-error').textContent='Looking up game…';
-
-  // We use a fixed "directory" bin that maps codes to bin IDs
-  // For simplicity, the host must share the code AND the viewer tries to find it
-  // We'll store a mapping in a well-known bin
-  const dirResult=await binGet(DIRECTORY_BIN_ID);
-  if(!dirResult){
-    document.getElementById('join-error').textContent='Could not reach server. Check connection.';
-    return;
-  }
-
-  const entry=dirResult[code];
-  if(!entry){
-    document.getElementById('join-error').textContent='Room not found. Check the code.';
-    return;
-  }
-
-  // Found it — save locally and open
-  reg[code]={binId:entry.binId,name:entry.name,owner:entry.owner,
-    createdAt:entry.createdAt,started:true,joined:[currentUser.username]};
-  saveRegistry(reg);
   closeModal('join-game-modal');
-  openGame(code,entry.binId);
+  openGame(id);
 }
 
-// Directory bin ID — this is a persistent bin that maps roomCode → binId
-// We create it once and reuse it. If it doesn't exist yet, we create it on first game creation.
-const DIRECTORY_BIN_ID_KEY='pkl_directory_bin';
-let DIRECTORY_BIN_ID=localStorage.getItem(DIRECTORY_BIN_ID_KEY)||'';
+function openGame(id) {
+  const games = getGames();
+  const game = games[id];
+  if (!game) { notify('Game not found'); return; }
+  currentGameId = id;
+  isHost = game.owner === currentUser.username;
 
-async function ensureDirectoryBin(){
-  if(DIRECTORY_BIN_ID) return;
-  // Check if there's a well-known bin we can use
-  // For a truly shared directory, we'd need a fixed bin ID.
-  // We'll use a workaround: the room code contains the bin ID encoded.
-  // Actually, let's embed the binId in the room code share mechanism differently:
-  // When sharing, we share binId:roomCode as the "code" shown in QR, but display only roomCode.
-  // The full share URL contains ?room=CODE&bin=BINID
-}
-
-async function openGame(code, binId){
-  currentGameId=code;
-  currentBinId=binId;
-
-  // First, load current state from cloud
-  setSyncStatus('connecting');
-  notify('Connecting…');
-
-  const remote=await binGet(binId);
-  if(!remote){
-    notify('❌ Could not load game. Check connection.');
-    setSyncStatus('off');
-    return;
-  }
-
-  isHost=(remote.owner===currentUser.username);
-  gameName=remote.name||'Tournament';
-
-  // Register as viewer in local registry
-  const reg=getRegistry();
-  if(!reg[code]){
-    reg[code]={binId,name:remote.name,owner:remote.owner,
-      createdAt:remote.createdAt||Date.now(),started:remote.started||false,
-      ended:remote.ended||false,joined:[currentUser.username]};
-  } else {
-    if(!reg[code].joined) reg[code].joined=[];
-    if(!reg[code].joined.includes(currentUser.username)) reg[code].joined.push(currentUser.username);
-  }
-  saveRegistry(reg);
-
-  // Update directory so others can find this game by code
-  if(isHost) await updateDirectory(code,binId,remote.name,remote.owner,remote.createdAt);
-
-  // Show tournament UI
   document.getElementById('lobby-screen').style.display='none';
   document.getElementById('lobby-screen').classList.remove('active');
   document.getElementById('tournament-wrapper').style.display='block';
-  document.getElementById('game-name-header').textContent=gameName;
-  updateRoomBar(code,binId);
+  document.getElementById('game-name-header').textContent = game.name;
 
-  // Show/hide host controls
-  document.getElementById('host-add-round-btn').style.display=isHost?'':'none';
-  document.getElementById('pager-add-btn').style.display=isHost?'':'none';
-  document.getElementById('viewer-banner').style.display=isHost?'none':'flex';
+  updateRoomBar(game.roomCode);
 
-  if(remote.gameState){
-    restoreState(remote.gameState);
+  if (game.state) {
+    // Restore state
+    restoreState(game.state);
     document.getElementById('setup-screen').style.display='none';
     document.getElementById('play-area').style.display='block';
     renderAll();
-    if(remote.ended) setTimeout(openResults,400);
-  } else if(isHost){
+    if (game.ended) {
+      setTimeout(openResults,300);
+    }
+  } else {
+    // Fresh setup
     document.getElementById('setup-screen').style.display='flex';
     document.getElementById('play-area').style.display='none';
     initSetup();
+  }
+
+  // Start sync only when this game is not marked offline
+  if (game.offline) {
+    // Local-only: ensure sync is stopped and label reflects local mode
+    stopSync();
+    setSyncStatus(false);
+    const lbl = document.getElementById('sync-label');
+    if (lbl) lbl.textContent = 'local';
+    const vb = document.getElementById('viewers-badge'); if (vb) vb.innerHTML = '👁 1 viewer (local)';
   } else {
-    // Viewer waiting for host to start
-    document.getElementById('setup-screen').style.display='none';
-    document.getElementById('play-area').style.display='none';
-    notify('Waiting for host to start the tournament…');
-  }
-
-  startSync(code,binId);
-}
-
-// Directory: a shared bin that maps room codes to bin IDs so viewers can find games
-const SHARED_DIR_BIN='6841f00de41b4d34e4b92e8f'; // Pre-created public directory bin
-
-async function updateDirectory(code,binId,name,owner,createdAt){
-  try {
-    // Get current directory
-    const dir=await binGet(SHARED_DIR_BIN)||{};
-    dir[code]={binId,name,owner,createdAt:createdAt||Date.now()};
-    await binUpdate(SHARED_DIR_BIN,dir);
-  } catch(e){ /* non-critical */ }
-}
-
-async function joinGameByCodeFull(code){
-  const reg=getRegistry();
-  if(reg[code]){
-    closeModal('join-game-modal');
-    openGame(code,reg[code].binId);
-    return;
-  }
-  document.getElementById('join-error').textContent='Looking up room…';
-  try {
-    const dir=await binGet(SHARED_DIR_BIN);
-    if(!dir||!dir[code]){
-      document.getElementById('join-error').textContent='Room not found. Check the code and try again.';
-      return;
-    }
-    const {binId,name,owner,createdAt}=dir[code];
-    reg[code]={binId,name,owner,createdAt,started:true,ended:false,joined:[currentUser.username]};
-    saveRegistry(reg);
-    closeModal('join-game-modal');
-    openGame(code,binId);
-  } catch(e){
-    document.getElementById('join-error').textContent='Connection error. Try again.';
+    startSync(id);
   }
 }
 
-// Override the doJoinGame to use the full version
-function doJoinGame(){
-  const code=document.getElementById('join-code-input').value.trim().toUpperCase();
-  document.getElementById('join-error').textContent='';
-  if(code.length!==6){document.getElementById('join-error').textContent='Enter a 6-character code';return;}
-  joinGameByCodeFull(code);
-}
-
-function backToLobby(){
-  stopSync();currentGameId=null;currentBinId=null;
+function backToLobby() {
+  stopSync();
+  currentGameId=null;
   document.getElementById('tournament-wrapper').style.display='none';
   document.getElementById('results-overlay').classList.remove('show');
-  // Remove room param from URL
-  const url=new URL(window.location.href);
-  url.searchParams.delete('room');url.searchParams.delete('bin');
-  window.history.replaceState({},'',url);
   showLobby();
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  ROOM BAR & QR
-// ════════════════════════════════════════════════
-function updateRoomBar(code,binId){
-  document.getElementById('room-code-display').textContent=code;
-  // URL includes both room code and bin ID for instant join
-  const url=window.location.href.split('?')[0]+`?room=${code}&bin=${binId}`;
-  document.getElementById('qr-url-display').textContent=url;
-  document.getElementById('qr-code-text').textContent=code;
-  const container=document.getElementById('qr-code');container.innerHTML='';
-  try{new QRCode(container,{text:url,width:180,height:180,colorDark:'#000',colorLight:'#fff'});}
-  catch(e){container.innerHTML=`<p style="color:#000;font-size:.8rem">${code}</p>`;}
-  // Update URL bar
-  const u=new URL(window.location.href);
-  u.searchParams.set('room',code);u.searchParams.set('bin',binId);
-  window.history.replaceState({},'',u);
-}
-
-function copyRoomCode(){
-  const code=document.getElementById('room-code-display').textContent;
-  const url=document.getElementById('qr-url-display').textContent;
-  navigator.clipboard?.writeText(url)
-    .then(()=>notify('🔗 Join URL copied! Share with spectators'))
-    .catch(()=>navigator.clipboard?.writeText(code).then(()=>notify('Room code copied!')).catch(()=>notify('Code: '+code)));
-}
-function openQRModal(){openModal('qr-modal');}
-
-// ════════════════════════════════════════════════
-//  SYNC — push/pull via JSONBin every 2 seconds
-// ════════════════════════════════════════════════
-let syncBusy=false;
-
-function startSync(code,binId){
-  stopSync();
-  setSyncStatus('connecting');
-  syncInterval=setInterval(()=>doSync(code,binId),2000);
-}
-function stopSync(){
-  if(syncInterval){clearInterval(syncInterval);syncInterval=null;}
-  setSyncStatus('off');
-}
-
-async function doSync(code,binId){
-  if(syncBusy) return;
-  syncBusy=true;
+// ═══════════════════════
+function updateRoomBar(code) {
+  document.getElementById('room-code-display').textContent = code;
+  const url = window.location.href.split('?')[0] + '?room=' + code;
+  document.getElementById('qr-url-display').textContent = url;
+  document.getElementById('qr-code-text').textContent = code;
+  // Generate QR
+  const container = document.getElementById('qr-code');
+  container.innerHTML = '';
   try {
-    if(isHost && players.length){
-      // HOST: push current state
-      await pushState();
-    } else {
-      // VIEWER: pull latest state
-      await pullState(code,binId);
-    }
-  } finally { syncBusy=false; }
+    new QRCode(container, {text:url, width:180, height:180, colorDark:'#000', colorLight:'#fff'});
+  } catch(e) {
+    container.innerHTML = '<p style="color:#000;font-size:.8rem">'+code+'</p>';
+  }
 }
 
-async function pushState(ended=false){
-  if(!currentBinId) return;
-  const reg=getRegistry();
-  const localEntry=reg[currentGameId]||{};
-  const payload={
-    roomCode:currentGameId, name:gameName,
-    owner:currentUser.username, createdAt:localEntry.createdAt||Date.now(),
-    started:true, ended:ended||gameEnded,
-    viewers:localEntry.joined||[currentUser.username],
-    lastUpdated:Date.now(),
-    currentRound, // ← explicitly track which round host is viewing
-    gameState:getStateObj()
-  };
-  const ok=await binUpdate(currentBinId,payload);
-  if(ok){
-    setSyncStatus('live');
-    lastSyncTime=Date.now();
-    updateSyncTimeDisplay();
-    // Update local registry
-    if(reg[currentGameId]){
-      reg[currentGameId].started=true;
-      if(ended||gameEnded) reg[currentGameId].ended=true;
-      saveRegistry(reg);
+function copyRoomCode() {
+  const code = document.getElementById('room-code-display').textContent;
+  const url = window.location.href.split('?')[0] + '?room=' + code;
+  navigator.clipboard?.writeText(url).then(()=>notify('Room URL copied! 📋')).catch(()=>{
+    navigator.clipboard?.writeText(code).then(()=>notify('Room code copied!')).catch(()=>notify('Code: '+code));
+  });
+}
+
+function openQRModal() { openModal('qr-modal'); }
+
+// ═══════════════════════
+//  SYNC (localStorage poll)
+// ═══════════════════════
+function startSync(gameId) {
+  stopSync();
+  setSyncStatus(true);
+  syncInterval = setInterval(()=>doSync(gameId), 1500);
+}
+function stopSync() {
+  if (syncInterval) { clearInterval(syncInterval); syncInterval=null; }
+  setSyncStatus(false);
+}
+function setSyncStatus(on) {
+  const dot = document.getElementById('sync-dot');
+  const lbl = document.getElementById('sync-label');
+  if (!dot||!lbl) return;
+  dot.className = 'sync-dot'+(on?'':' off');
+  lbl.textContent = on?'live':'offline';
+}
+
+function doSync(gameId) {
+  if (!currentGameId) return;
+  const games = getGames();
+  const game = games[gameId];
+  if (!game) return;
+
+  // Push our state if we're host and have started
+  if (isHost && players.length && rounds.length) {
+    const stateJson = JSON.stringify(getState());
+    if (stateJson !== lastSyncHash) {
+      lastSyncHash = stateJson;
+      game.state = getState();
+      game.started = true;
+      games[gameId] = game;
+      saveGames(games);
     }
-    if(ended||gameEnded){
-      const dir=await binGet(SHARED_DIR_BIN)||{};
-      if(dir[currentGameId]){
-        dir[currentGameId].ended=true;
-        await binUpdate(SHARED_DIR_BIN,dir);
+  }
+
+  // Pull state if viewer
+  if (!isHost && game.state) {
+    const incoming = JSON.stringify(game.state);
+    if (incoming !== lastSyncHash) {
+      lastSyncHash = incoming;
+      restoreState(game.state);
+      if (document.getElementById('play-area').style.display==='none' && players.length) {
+        document.getElementById('setup-screen').style.display='none';
+        document.getElementById('play-area').style.display='block';
       }
+      renderAll();
+      if (game.ended) setTimeout(openResults,300);
     }
-  } else {
-    setSyncStatus('off');
-  }
-}
-
-async function pullState(code,binId){
-  const remote=await binGet(binId);
-  if(!remote){setSyncStatus('off');return;}
-  setSyncStatus('live');
-  lastSyncTime=Date.now();
-  updateSyncTimeDisplay();
-
-  if(!remote.gameState) return; // Not started yet
-
-  const remoteHash=JSON.stringify(remote.gameState)+remote.currentRound+remote.ended;
-  if(remoteHash===lastSyncEtag) return; // No changes
-  lastSyncEtag=remoteHash;
-
-  // State changed — restore and re-render
-  restoreState(remote.gameState);
-  gameEnded=remote.ended||false;
-
-  // Sync to the round the HOST is currently viewing
-  if(remote.currentRound !== undefined && remote.currentRound !== currentRound){
-    currentRound=remote.currentRound;
-    notify(`📡 Host switched to Round ${currentRound+1}`);
   }
 
-  if(document.getElementById('play-area').style.display==='none'){
-    document.getElementById('setup-screen').style.display='none';
-    document.getElementById('play-area').style.display='block';
-  }
-  renderAll();
-  if(remote.ended && !document.getElementById('results-overlay').classList.contains('show')){
-    setTimeout(openResults,500);
-  }
+  // Update viewer count display
+  const viewers = (game.joinedBy||[]).length;
+  const vb = document.getElementById('viewers-badge');
+  if (vb) vb.innerHTML = `👁 ${viewers} viewer${viewers!==1?'s':''}`;
 }
 
-function setSyncStatus(state){
-  const dot=document.getElementById('sync-dot');
-  const lbl=document.getElementById('sync-label');
-  const badge=document.getElementById('sync-role-badge');
-  if(!dot) return;
-  dot.className='sync-dot'+(state==='off'?' off':state==='connecting'?' connecting':'');
-  lbl.textContent=state==='live'?'Live':state==='connecting'?'Connecting…':'Disconnected';
-  if(badge){
-    badge.textContent=isHost?'HOST':'VIEWER';
-    badge.className='sync-role-badge '+(isHost?'host':'viewer');
-  }
-}
-
-function updateSyncTimeDisplay(){
-  const el=document.getElementById('last-sync-time');
-  if(!el||!lastSyncTime) return;
-  const s=Math.round((Date.now()-lastSyncTime)/1000);
-  el.textContent=`· synced ${s===0?'just now':`${s}s ago`}`;
-}
-
-// Update "synced X ago" display every second
-setInterval(()=>{if(lastSyncTime) updateSyncTimeDisplay();},1000);
-
-// Update viewer count from local registry
-function updateViewerCount(){
-  const reg=getRegistry();
-  const entry=reg[currentGameId];
-  const count=(entry?.joined||[]).length;
-  const vb=document.getElementById('viewers-badge');
-  if(vb) vb.innerHTML=`👁 ${count} viewer${count!==1?'s':''}`;
-}
-
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  GAME STATE
-// ════════════════════════════════════════════════
-function getStateObj(){
-  return{players,numCourts,numRounds,currentRound,kingsActive,gameMode,rounds,stats,gameEnded};
+// ═══════════════════════
+let players=[], numCourts=2, numRounds=8, currentRound=0;
+let kingsActive=true, gameMode='doubles';
+let rounds=[], stats={};
+
+function getState() {
+  return {players,numCourts,numRounds,currentRound,kingsActive,gameMode,rounds,stats};
 }
-function restoreState(s){
-  players=s.players||[];numCourts=s.numCourts||2;numRounds=s.numRounds||8;
-  currentRound=s.currentRound||0;kingsActive=s.kingsActive!==undefined?s.kingsActive:true;
-  gameMode=s.gameMode||'doubles';rounds=s.rounds||[];stats=s.stats||{};
-  gameEnded=s.gameEnded||false;
+function restoreState(s) {
+  players=s.players||[]; numCourts=s.numCourts||2; numRounds=s.numRounds||8;
+  currentRound=s.currentRound||0; kingsActive=s.kingsActive!==undefined?s.kingsActive:true;
+  gameMode=s.gameMode||'doubles'; rounds=s.rounds||[]; stats=s.stats||{};
 }
 
-// ════════════════════════════════════════════════
-//  SETUP
-// ════════════════════════════════════════════════
-function setMode(m){
-  gameMode=m;
-  ['doubles','singles','mixed'].forEach(x=>document.getElementById('mode-'+x).classList.toggle('active',x===m));
+function pushState(ended=false) {
+  if (!currentGameId) return;
+  const games = getGames();
+  if (!games[currentGameId]) return;
+  games[currentGameId].state = getState();
+  games[currentGameId].started = true;
+  if (ended) games[currentGameId].ended = true;
+  saveGames(games);
+  lastSyncHash = JSON.stringify(getState());
 }
-function initSetup(){
-  const grid=document.getElementById('player-grid');grid.innerHTML='';
+
+// ═══════════════════════
+//  SETUP
+// ═══════════════════════
+function setMode(m) {
+  gameMode=m;
+  ['doubles','singles','mixed'].forEach(x=>{
+    document.getElementById('mode-'+x).classList.toggle('active',x===m);
+  });
+}
+
+function initSetup() {
+  const grid = document.getElementById('player-grid');
+  grid.innerHTML='';
   ['Alice','Bob','Carol','Dave','Eve','Frank','Grace','Henry'].forEach(n=>addPlayerField(n));
   updatePlayerCount();
 }
-function addPlayerField(defaultVal){
-  const grid=document.getElementById('player-grid');
-  if(grid.children.length>=32){notify('Max 32 players');return;}
+
+function addPlayerField(defaultVal) {
+  const grid = document.getElementById('player-grid');
+  if (grid.children.length>=32) { notify('Max 32 players'); return; }
   const idx=grid.children.length+1;
-  const wrap=document.createElement('div');wrap.className='p-input-wrap';
+  const wrap=document.createElement('div'); wrap.className='p-input-wrap';
   wrap.innerHTML=`<label>Player ${idx}</label>
     <input type="text" placeholder="Player name" class="p-name-input" value="${defaultVal||''}" oninput="updatePlayerCount()">
     <button class="remove-player" onclick="removePlayerField(this)">✕</button>`;
-  grid.appendChild(wrap);updatePlayerCount();
+  grid.appendChild(wrap); updatePlayerCount();
 }
-function removePlayerField(btn){
+function removePlayerField(btn) {
   btn.parentElement.remove();
   document.querySelectorAll('.p-input-wrap label').forEach((l,i)=>l.textContent=`Player ${i+1}`);
   updatePlayerCount();
 }
-function updatePlayerCount(){
+function updatePlayerCount() {
   const inputs=document.querySelectorAll('.p-name-input');
-  let c=0;inputs.forEach(i=>{if(i.value.trim())c++;});
+  let c=0; inputs.forEach(i=>{if(i.value.trim())c++;});
   document.getElementById('player-count').textContent=c;
 }
 
-async function startTournament(){
-  if(!isHost){notify('Only the host can start');return;}
+function startTournament() {
+  if (!isHost) { notify('Only the host can start'); return; }
   const inputs=document.querySelectorAll('.p-name-input');
   players=[];
   inputs.forEach(inp=>{const v=inp.value.trim();if(v&&!players.includes(v))players.push(v);});
   const min=gameMode==='singles'?2:4;
-  if(players.length<min){notify(`Need at least ${min} players!`);return;}
+  if (players.length<min){notify(`Need at least ${min} players!`);return;}
   numCourts=Math.max(1,parseInt(document.getElementById('court-count').value)||2);
   numRounds=Math.max(2,parseInt(document.getElementById('round-count').value)||8);
-  const ppmVal=gameMode==='singles'?2:4;
-  numCourts=Math.min(numCourts,Math.floor(players.length/ppmVal));
+  const ppm=gameMode==='singles'?2:4;
+  numCourts=Math.min(numCourts,Math.floor(players.length/ppm));
   kingsActive=document.getElementById('kings-default-toggle').checked;
   stats={};
-  players.forEach(p=>{stats[p]={wins:0,losses:0,ptsFor:0,ptsAgainst:0,partners:{},opponents:{}};});
+  players.forEach(p=>{ stats[p]={wins:0,losses:0,ptsFor:0,ptsAgainst:0,partners:{},opponents:{}}; });
   rounds=new Array(numRounds).fill(null);
   currentRound=0;
   generateRound(0);
   document.getElementById('setup-screen').style.display='none';
   document.getElementById('play-area').style.display='block';
-  await pushState();
+  pushState();
   renderAll();
-  notify('🎾 Tournament started! Others can now join and watch live.');
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  SCHEDULING
-// ════════════════════════════════════════════════
+// ═══════════════════════
 function pps(){return gameMode==='singles'?1:2;}
 function ppm(){return pps()*2;}
+
 function pairScore(a,b,type){
-  if(type==='partner')return(stats[a].partners[b]||0)+(stats[b].partners[a]||0);
-  return(stats[a].opponents[b]||0)+(stats[b].opponents[a]||0);
+  if(type==='partner') return (stats[a].partners[b]||0)+(stats[b].partners[a]||0);
+  return (stats[a].opponents[b]||0)+(stats[b].opponents[a]||0);
 }
+
 function generateRound(rIdx){
   if(rounds[rIdx]) return;
   if(kingsActive&&rIdx>0&&rounds.slice(0,rIdx).some(r=>r&&r.matches.some(m=>m.submitted))){
-    rounds[rIdx]=generateKingsRound(rIdx);return;
+    rounds[rIdx]=generateKingsRound(rIdx); return;
   }
-  let pool=[...players],best=null,bestScore=Infinity;
+  let pool=[...players];
+  let best=null,bestScore=Infinity;
   for(let att=0;att<300;att++){
-    for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+    for(let i=pool.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];
+    }
     const used=new Set(),matches=[];let score=0,ok=true;
     for(let c=0;c<numCourts;c++){
       const avail=pool.filter(p=>!used.has(p));
@@ -1562,8 +1354,10 @@ function generateRound(rIdx){
   }
   rounds[rIdx]=best||{matches:[],sitOuts:pool};
 }
+
 function generateKingsRound(rIdx){
-  const ranked=getRankedPlayers();const matches=[];const used=new Set();
+  const ranked=getRankedPlayers();
+  const matches=[];const used=new Set();
   for(let c=0;c<numCourts;c++){
     const avail=ranked.filter(p=>!used.has(p));
     if(avail.length<ppm()) break;
@@ -1577,28 +1371,32 @@ function generateKingsRound(rIdx){
   matches.sort((a,b)=>b.court-a.court);
   return{matches,sitOuts:ranked.filter(p=>!used.has(p))};
 }
+
 function getRankedPlayers(){
   return[...players].sort((a,b)=>{
     const sa=stats[a],sb=stats[b];
-    if(sb.wins!==sa.wins)return sb.wins-sa.wins;
+    if(sb.wins!==sa.wins) return sb.wins-sa.wins;
     return(sb.ptsFor-sb.ptsAgainst)-(sa.ptsFor-sa.ptsAgainst);
   });
 }
-async function addRound(){
+
+function addRound(){
   if(!isHost){notify('Only host can add rounds');return;}
   numRounds++;rounds.push(null);generateRound(numRounds-1);
-  currentRound=numRounds-1;
-  await pushState();renderAll();notify(`Round ${numRounds} added!`);
+  currentRound=numRounds-1;pushState();renderAll();notify(`Round ${numRounds} added!`);
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  RENDER
-// ════════════════════════════════════════════════
-function renderAll(){renderPager();renderRoundView();renderStandings();updateHeader();updateViewerCount();}
+// ═══════════════════════
+function renderAll(){
+  renderPager();renderRoundView();renderStandings();updateHeader();
+}
 
 function updateHeader(){
   document.getElementById('round-badge').textContent=`Round ${currentRound+1} of ${numRounds}`;
 }
+
 function renderPager(){
   const container=document.getElementById('round-pager');container.innerHTML='';
   for(let r=0;r<numRounds;r++){
@@ -1606,10 +1404,7 @@ function renderPager(){
     const pip=document.createElement('div');
     const isComplete=rounds[r]&&rounds[r].matches.length>0&&rounds[r].matches.every(m=>m.submitted);
     pip.className=`round-pip${r===currentRound?' active':''}${isComplete?' complete':''}`;
-    pip.textContent=r+1;
-    if(isHost) pip.onclick=()=>switchRound(r);
-    else pip.onclick=()=>switchRoundViewer(r);
-    container.appendChild(pip);
+    pip.textContent=r+1;pip.onclick=()=>switchRound(r);container.appendChild(pip);
   }
   document.getElementById('prev-btn').disabled=currentRound===0;
   document.getElementById('next-btn').disabled=currentRound===numRounds-1;
@@ -1620,13 +1415,18 @@ function renderRoundView(){
   const rd=rounds[currentRound];
   const isKR=rd&&rd.matches.some(m=>m.isKings);
   document.getElementById('kings-badge-el').style.display=isKR?'inline-block':'none';
+
   const sos=(rd&&rd.sitOuts)||[];
   const soSec=document.getElementById('sitout-section');
-  if(sos.length){soSec.style.display='block';document.getElementById('sitout-chips').innerHTML=sos.map(p=>`<div class="sitout-chip">🪑 ${esc(p)}</div>`).join('');}
+  const soChips=document.getElementById('sitout-chips');
+  if(sos.length){soSec.style.display='block';soChips.innerHTML=sos.map(p=>`<div class="sitout-chip">🪑 ${esc(p)}</div>`).join('');}
   else soSec.style.display='none';
+
   renderLocator();
+
   const grid=document.getElementById('courts-grid');grid.innerHTML='';
   if(!rd) return;
+
   rd.matches.forEach((match,mIdx)=>{
     const s1won=match.submitted&&match.score1>match.score2;
     const s2won=match.submitted&&match.score2>match.score1;
@@ -1635,7 +1435,6 @@ function renderRoundView(){
     const isSingles=match.team1.length===1;
     const t1html=match.team1.map(p=>`<div class="player-chip${s1won?' winner':''}">${esc(p)}</div>`).join('');
     const t2html=match.team2.map(p=>`<div class="player-chip${s2won?' winner':''}">${esc(p)}</div>`).join('');
-    // Scores: editable for host, readonly for viewers
     const readonly=(!isHost||match.submitted)?'readonly':'';
     card.innerHTML=`
       <div class="court-header">
@@ -1667,6 +1466,7 @@ function renderRoundView(){
       </div>`;
     grid.appendChild(card);
   });
+
   const saveWrap=document.getElementById('save-round-wrap');
   const saveBtn=document.getElementById('save-round-btn');
   if(isHost&&rd&&rd.matches.length){
@@ -1695,10 +1495,12 @@ function renderLocator(){
   });
   document.getElementById('locator-result').className='locator-result';
 }
+
 function locatePlayer(name,pill){
   document.querySelectorAll('.loc-pill').forEach(p=>p.classList.remove('active'));
   pill.classList.add('active');
-  const rd=rounds[currentRound];const result=document.getElementById('locator-result');
+  const rd=rounds[currentRound];
+  const result=document.getElementById('locator-result');
   if(!rd){result.innerHTML=`<span style="color:var(--muted)">No round data.</span>`;result.className='locator-result show';return;}
   if(rd.sitOuts&&rd.sitOuts.includes(name)){
     result.innerHTML=`<strong>${esc(name)}</strong> is <em style="color:var(--muted)">sitting out</em> this round.`;
@@ -1708,7 +1510,8 @@ function locatePlayer(name,pill){
     const all=[...m.team1,...m.team2];
     if(all.includes(name)){
       const onT1=m.team1.includes(name);
-      const myTeam=onT1?m.team1:m.team2,opp=onT1?m.team2:m.team1;
+      const myTeam=onT1?m.team1:m.team2;
+      const opp=onT1?m.team2:m.team1;
       const partner=myTeam.filter(p=>p!==name);
       result.innerHTML=`<strong>${esc(name)}</strong> → <em>Court ${m.court}</em>${m.isKings?' 👑':''}<br>`
         +(partner.length?`Partner: <strong>${esc(partner.join(', '))}</strong><br>`:'')
@@ -1726,9 +1529,9 @@ function renderStandings(){
   ranked.forEach((p,i)=>{
     const s=stats[p],diff=s.ptsFor-s.ptsAgainst;
     const tr=document.createElement('tr');if(i===0)tr.className='top-row';
-    const icons=['🥇','🥈','🥉'];
-    tr.innerHTML=`<td class="td-rank ${i===0?'g':i===1?'s':i===2?'b':''}">${icons[i]||i+1}</td>
-      <td><strong>${esc(p)}</strong></td>
+    const rankIcon=i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1;
+    const rankClass=i===0?'g':i===1?'s':i===2?'b':'';
+    tr.innerHTML=`<td class="td-rank ${rankClass}">${rankIcon}</td><td><strong>${esc(p)}</strong></td>
       <td class="td-w">${s.wins}</td><td class="td-l">${s.losses}</td>
       <td class="td-c">${s.ptsFor}</td><td class="td-c">${s.ptsAgainst}</td>
       <td class="td-diff ${diff>=0?'pos':'neg'}">${diff>=0?'+':''}${diff}</td>`;
@@ -1749,13 +1552,14 @@ function showWinner(){
     <div class="w-stat"><div class="val">${diff>=0?'+':''}${diff}</div><div class="lbl">Diff</div></div>`;
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  SAVE ROUND
-// ════════════════════════════════════════════════
-async function saveRound(){
+// ═══════════════════════
+function saveRound(){
   if(!isHost){notify('Only host can save scores');return;}
   const rd=rounds[currentRound];if(!rd) return;
   let errors=[],anyNew=false;
+
   rd.matches.forEach((match,mIdx)=>{
     if(match.submitted) return;
     const raw1=document.getElementById(`sc_${currentRound}_${mIdx}_1`).value.trim();
@@ -1764,10 +1568,13 @@ async function saveRound(){
     const s1=parseInt(raw1),s2=parseInt(raw2);
     if(isNaN(s1)||isNaN(s2)||s1<0||s2<0){errors.push(`Court ${match.court}: invalid score`);return;}
     if(s1===s2){errors.push(`Court ${match.court}: scores tied`);return;}
+
     match.score1=s1;match.score2=s2;match.submitted=true;anyNew=true;
-    const winners=s1>s2?match.team1:match.team2,losers=s1>s2?match.team2:match.team1;
+    const winners=s1>s2?match.team1:match.team2;
+    const losers=s1>s2?match.team2:match.team1;
     const winScore=Math.max(s1,s2),loseScore=Math.min(s1,s2);
     const isSingles=match.team1.length===1;
+
     winners.forEach(p=>{
       stats[p].wins++;stats[p].ptsFor+=winScore;stats[p].ptsAgainst+=loseScore;
       if(!isSingles){const partner=winners.find(x=>x!==p);if(partner)stats[p].partners[partner]=(stats[p].partners[partner]||0)+1;}
@@ -1779,55 +1586,44 @@ async function saveRound(){
       winners.forEach(opp=>{stats[p].opponents[opp]=(stats[p].opponents[opp]||0)+1;});
     });
   });
+
   if(errors.length){notify(errors[0]);return;}
   if(!anyNew){notify('All courts already saved!');return;}
+
   const allRoundsDone=rounds.every(r=>r&&r.matches.length>0&&r.matches.every(m=>m.submitted));
   if(allRoundsDone){
-    gameEnded=true;
-    await pushState(true);
+    // FINAL ROUND — auto go to results!
+    pushState(true);
     renderAll();
     notify('🏆 Tournament complete!');
-    setTimeout(()=>{showWinner();setTimeout(openResults,600);},400);
+    setTimeout(()=>{
+      showWinner();
+      setTimeout(openResults,600);
+    },400);
     return;
   }
+
   const allDone=rd.matches.every(m=>m.submitted);
   if(allDone&&currentRound<numRounds-1){
     generateRound(currentRound+1);
-    await pushState();
+    pushState();
     notify(`Round ${currentRound+1} complete! →`);
-    setTimeout(async()=>{currentRound++;renderAll();await pushState();},700);
+    setTimeout(()=>{currentRound++;renderAll();},700);
   } else {
-    await pushState();renderAll();notify('✅ Scores saved & synced!');
+    pushState();renderAll();notify('✅ Scores saved!');
   }
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  NAVIGATION
-// ════════════════════════════════════════════════
-async function switchRound(r){
-  currentRound=r;generateRound(r);renderAll();
-  if(isHost) await pushState(); // Push so viewers see same round
-}
-function switchRoundViewer(r){
-  // Viewers can browse rounds locally but get notified if host changes
-  currentRound=r;generateRound(r);renderAll();
-}
-function prevRound(){
-  if(currentRound>0){
-    currentRound--;generateRound(currentRound);renderAll();
-    if(isHost) pushState();
-  }
-}
-function nextRound(){
-  if(currentRound<numRounds-1){
-    currentRound++;generateRound(currentRound);renderAll();
-    if(isHost) pushState();
-  }
-}
+// ═══════════════════════
+function switchRound(r){currentRound=r;generateRound(r);renderAll();}
+function prevRound(){if(currentRound>0)switchRound(currentRound-1);}
+function nextRound(){if(currentRound<numRounds-1)switchRound(currentRound+1);}
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  TV MODE
-// ════════════════════════════════════════════════
+// ═══════════════════════
 function openTVMode(){renderTV();document.getElementById('tv-overlay').classList.add('show');}
 function closeTVMode(){document.getElementById('tv-overlay').classList.remove('show');}
 function renderTV(){
@@ -1841,10 +1637,13 @@ function renderTV(){
       const isSingles=match.team1.length===1;
       const t1=match.team1.map(p=>`<div class="tv-player">${esc(p)}</div>`).join('');
       const t2=match.team2.map(p=>`<div class="tv-player">${esc(p)}</div>`).join('');
+      const status=match.submitted?'complete':'live';
       card.innerHTML=`<div class="tv-court-head"><div class="tv-court-label">COURT ${match.court}</div>
-        <div class="tv-court-sublabel">${match.isKings?'👑 KINGS':isSingles?'SINGLES':'DOUBLES'}</div></div>
-        <div class="tv-match">${t1}<div class="tv-vs">VS</div>${t2}
-        <div class="tv-status ${match.submitted?'complete':'live'}">${match.submitted?'✅ Complete':'⚡ In Play'}</div></div>`;
+        <div class="tv-court-sublabel">${match.isKings?'👑 KINGS COURT':isSingles?'SINGLES':'DOUBLES'}</div></div>
+        <div class="tv-match"><div class="tv-team"><div>${t1}</div></div>
+        <div class="tv-vs">VS</div>
+        <div class="tv-team"><div>${t2}</div></div>
+        <div class="tv-status ${status}">${match.submitted?'✅ Complete':'⚡ In Play'}</div></div>`;
       grid.appendChild(card);
     });
     body.appendChild(grid);
@@ -1857,7 +1656,8 @@ function renderTV(){
   const ranked=getRankedPlayers();
   standWrap.innerHTML=`<div class="tv-standings-head"><h2>📊 STANDINGS</h2></div>
     <table><thead><tr><th class="c">#</th><th>Player</th><th class="c">W</th><th class="c">L</th><th class="c">+/−</th></tr></thead>
-    <tbody>${ranked.map((p,i)=>{const s=stats[p],diff=s.ptsFor-s.ptsAgainst;const icons=['🥇','🥈','🥉'];
+    <tbody>${ranked.map((p,i)=>{const s=stats[p],diff=s.ptsFor-s.ptsAgainst;
+      const icons=['🥇','🥈','🥉'];
       return`<tr class="${i===0?'top-row':''}"><td class="td-rank ${i===0?'g':i===1?'s':i===2?'b':''}">${icons[i]||i+1}</td>
         <td><strong>${esc(p)}</strong></td><td class="td-w">${s.wins}</td><td class="td-l">${s.losses}</td>
         <td class="td-diff ${diff>=0?'pos':'neg'}">${diff>=0?'+':''}${diff}</td></tr>`;}).join('')}
@@ -1865,9 +1665,9 @@ function renderTV(){
   body.appendChild(standWrap);
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
 //  RESULTS
-// ════════════════════════════════════════════════
+// ═══════════════════════
 function openResults(){
   renderResultsPage();
   document.getElementById('results-overlay').classList.add('show');
@@ -1875,6 +1675,7 @@ function openResults(){
   document.getElementById('results-overlay').scrollTop=0;
 }
 function closeResults(){document.getElementById('results-overlay').classList.remove('show');}
+
 function fireFireworks(){
   const fw=document.getElementById('fireworks');fw.innerHTML='';
   const colors=['#FFD700','#B22234','#ffffff','#3C3B6E','#5cdf8a','#ff8844'];
@@ -1893,10 +1694,16 @@ function fireFireworks(){
     },burst*300);
   }
 }
+
 function renderResultsPage(){
   const ranked=getRankedPlayers();
+  const games=getGames();
+  const gameName=currentGameId&&games[currentGameId]?games[currentGameId].name:'Tournament';
   document.getElementById('results-game-name').textContent=`${gameName} · Final Standings`;
-  document.getElementById('results-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const now=new Date();
+  document.getElementById('results-date').textContent=now.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // Podium
   const podiumWrap=document.getElementById('podium-wrap');podiumWrap.innerHTML='';
   const podiumOrder=[1,0,2];const medals=['🥇','🥈','🥉'];const blockClasses=['silver','gold','bronze'];
   podiumOrder.forEach(rank=>{
@@ -1910,13 +1717,15 @@ function renderResultsPage(){
       <div class="podium-block ${blockClasses[rank]}">${rank+1}</div>`;
     podiumWrap.appendChild(slot);
   });
+
+  // Full table
   const tbody=document.getElementById('results-standings-body');tbody.innerHTML='';
   ranked.forEach((p,i)=>{
     const s=stats[p],diff=s.ptsFor-s.ptsAgainst;
     const total=s.wins+s.losses,winPct=total>0?Math.round((s.wins/total)*100):0;
-    const icons=['🥇','🥈','🥉'];
+    const icons=['🥇','🥈','🥉'];const rankClass=i===0?'g':i===1?'s':i===2?'b':'';
     const tr=document.createElement('tr');if(i===0)tr.className='res-top';
-    tr.innerHTML=`<td class="res-rank ${i===0?'g':i===1?'s':i===2?'b':''}">${icons[i]||i+1}</td>
+    tr.innerHTML=`<td class="res-rank ${rankClass}">${icons[i]||i+1}</td>
       <td class="res-name">${esc(p)}</td>
       <td class="res-w">${s.wins}</td><td class="res-l">${s.losses}</td>
       <td class="res-num">${s.ptsFor}</td><td class="res-num">${s.ptsAgainst}</td>
@@ -1924,6 +1733,8 @@ function renderResultsPage(){
       <td class="res-num">${winPct}%</td>`;
     tbody.appendChild(tr);
   });
+
+  // Round by round
   const rrGrid=document.getElementById('round-results-grid');rrGrid.innerHTML='';
   rounds.forEach((rd,rIdx)=>{
     if(!rd||!rd.matches.length) return;
@@ -1942,8 +1753,11 @@ function renderResultsPage(){
     rrGrid.appendChild(card);
   });
 }
+
 function downloadCSV(){
   const ranked=getRankedPlayers();
+  const games=getGames();
+  const gameName=currentGameId&&games[currentGameId]?games[currentGameId].name:'Tournament';
   const now=new Date().toLocaleDateString('en-US');
   let csv=`${gameName},${now}\n\nRank,Player,Wins,Losses,Points For,Points Against,Point Diff,Win %\n`;
   ranked.forEach((p,i)=>{
@@ -1965,55 +1779,47 @@ function downloadCSV(){
   a.download=`pickleball-${now.replace(/\//g,'-')}.csv`;a.click();
 }
 
-// ════════════════════════════════════════════════
-//  MODALS & UTILS
-// ════════════════════════════════════════════════
+// ═══════════════════════
+//  MODALS
+// ═══════════════════════
 function openModal(id){document.getElementById(id).classList.add('show');}
 function closeModal(id){document.getElementById(id).classList.remove('show');}
+// Close on overlay click
 document.querySelectorAll('.modal-overlay').forEach(overlay=>{
   overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('show');});
 });
+
+// ═══════════════════════
+//  NOTIF
+// ═══════════════════════
 function notify(msg){
   const el=document.getElementById('notif');el.textContent=msg;
-  el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2800);
-}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function initStars(){
-  const bg=document.getElementById('stars-bg');
-  for(let i=0;i<40;i++){
-    const s=document.createElement('div');s.className='star-dot';
-    s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
-    s.style.animationDelay=(Math.random()*4)+'s';
-    s.style.animationDuration=(2+Math.random()*4)+'s';bg.appendChild(s);
-  }
+  el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2600);
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════
+//  UTILS
+// ═══════════════════════
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════
 //  INIT
-// ════════════════════════════════════════════════
+// ═══════════════════════
 initStars();
 
-// Check URL for room + bin (from QR scan)
-const initParams=new URLSearchParams(window.location.search);
-const initRoom=initParams.get('room');
-const initBin=initParams.get('bin');
+// Check URL for room code first
+const initParams = new URLSearchParams(window.location.search);
+const initRoom = initParams.get('room');
 
-const session=getSession();
-if(session){
-  currentUser=session;
+const session = getSession();
+if (session) {
+  currentUser = session;
   showLobby();
-  if(initRoom&&initBin){
-    // Direct join via QR — bypass join modal
-    setTimeout(()=>{
-      const reg=getRegistry();
-      if(!reg[initRoom]) reg[initRoom]={binId:initBin,name:'Shared Game',owner:'?',createdAt:Date.now(),started:true,joined:[currentUser.username]};
-      saveRegistry(reg);
-      openGame(initRoom,initBin);
-    },500);
-  } else if(initRoom){
-    setTimeout(()=>joinGameByCodeFull(initRoom),500);
-  }
+  if (initRoom) setTimeout(()=>joinGameByCode(initRoom.toUpperCase()), 400);
 } else {
+  // Show auth
   document.getElementById('auth-screen').style.display='flex';
   document.getElementById('auth-screen').classList.add('active');
 }
